@@ -8,14 +8,37 @@
 
 /* Rule Section */
 %% 
+(integer) {
+	yylval.num = 1;
+	return DATATYPE;
+}
+(decimal) {
+	yylval.num = 2;
+	return DATATYPE;
+}
+(print) {
+	return PRINT;
+}
+
+\"[a-zA-Z0-9 ]*\" {
+		yylval.str = (char*)yytext;
+		return STRING;
+}
 ([0-9]+|[0-9]+\.[0-9]+) { 
 		yylval.str = (char*)yytext;
 		return NUMBER; 
-
 	} 
+
+[a-zA-Z_][a-zA-Z0-9_]* { 
+		yylval.str = (char*)yytext;
+		return Identifier; 
+	} 
+
 [\t] ; 
 
-[\n] return 0; 
+[\n] return NEWLINE;
+
+[ ] ;
 
 . return yytext[0]; 
 

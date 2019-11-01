@@ -45,23 +45,33 @@ extern int yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
-    NUMBER = 258
+    NUMBER = 258,
+    Identifier = 259,
+    NEWLINE = 260,
+    DATATYPE = 261,
+    PRINT = 262,
+    STRING = 263
   };
 #endif
 /* Tokens.  */
 #define NUMBER 258
+#define Identifier 259
+#define NEWLINE 260
+#define DATATYPE 261
+#define PRINT 262
+#define STRING 263
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 
 union YYSTYPE
 {
-#line 11 "parser.y" /* yacc.c:1909  */
+#line 12 "parser.y" /* yacc.c:1909  */
  char* str;
           float num;
  
 
-#line 65 "y.tab.h" /* yacc.c:1909  */
+#line 75 "y.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

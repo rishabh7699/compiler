@@ -3,10 +3,11 @@
 #include<stdio.h> 
 #include <stdlib.h>
 int flag=0; 
+int line=1;
 extern FILE *yyin;
 %} 
 
-%token NUMBER
+%token NUMBER Identifier NEWLINE DATATYPE PRINT STRING
 
 %union { char* str;
           float num;
@@ -18,17 +19,66 @@ extern FILE *yyin;
 
 %left '(' ')'
 
-%type<num> E ArithmeticExpression
-%type<str> NUMBER
+%type<num> E Expression DATATYPE
+%type<str> NUMBER Identifier STRING
 
 /* Rule Section */
 %% 
 
-ArithmeticExpression: E{ 
+program :  {
+    printf("\nlines=%d\n", line);
+    return 0;}
+| statement program;
 
-    printf("\nResult=%f\n", $$); 
+statement : Expression
 
-    return 0; 
+| Declaration
+
+| Input
+
+| Output ';'
+
+| newline {
+    line++;
+}
+| emptyline
+
+;
+
+emptyline: ';';
+
+Declaration: DATATYPE Identifier More ';'
+
+| DATATYPE Identifier '=' E More ';' { 
+
+    printf("\nResult=%f\n", $4); 
+    }
+;
+
+More: 
+
+| ',' Identifier More
+
+| ',' Identifier '=' E More { 
+
+    printf("\nResult=%f\n", $4); 
+    }
+
+;
+
+Input : 'i''n''p''u''t';
+
+Output : PRINT STRING {
+    printf("\n%s\n",$2);
+}
+| PRINT Identifier
+;
+
+newline : NEWLINE;
+
+Expression: Identifier '=' E ';'{ 
+
+    printf("\nResult=%f\n", $3); 
 
     }; 
 E:E'+'E {$$=$1+$3;} 
@@ -53,12 +103,10 @@ void main()
 { 
 yyin=fopen("exp","r");
 yyparse(); 
-if(flag==0) 
-printf("\nEntered arithmetic expression is Valid\n\n"); 
 } 
 
 void yyerror() 
 { 
-printf("\nEntered arithmetic expression is Invalid\n\n"); 
+printf("\nError in line %d\n\n", line); 
 flag=1; 
 } 
