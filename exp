@@ -1,6 +1,21 @@
-integer for = 1+21 +4, abc = (9+3)*4, rishabh;
+integer xyz = (1+21)*apple, abc = (9+3)*4, rishabh;
 decimal rishabh = 90;
-float = 0;
-print "rishabh jain 1234";
+xyz = 0+rishabh;
+integer c = 0;
+print "hi";
 print a;
-while = 3+4*5;
+xyz = 3+4*5;
+
+if (a) 
+{
+    print a;
+}else
+{
+    print "no";
+
+
+    a = 9+f;
+
+
+}
+

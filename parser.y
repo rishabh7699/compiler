@@ -7,7 +7,7 @@ int line=1;
 extern FILE *yyin;
 %} 
 
-%token NUMBER Identifier NEWLINE DATATYPE PRINT STRING
+%token NUMBER Identifier NEWLINE DATATYPE PRINT STRING IF ELSE
 
 %union { char* str;
           float num;
@@ -43,7 +43,21 @@ statement : Expression
 }
 | emptyline
 
+| IFstatement
+
 ;
+
+IFstatement : IF '(' Identifier ')' ENTER '{' IFblock '}' ENTER ELSE ENTER '{' IFblock '}' {printf("\n if statement \n");}
+
+;
+
+ENTER : 
+
+| newline ENTER {line++;};
+
+IFblock : 
+
+| statement IFblock ;
 
 emptyline: ';';
 
@@ -71,8 +85,9 @@ Input : 'i''n''p''u''t';
 Output : PRINT STRING {
     printf("\n%s\n",$2);
 }
-| PRINT Identifier
+| PRINT Identifier 
 ;
+
 
 newline : NEWLINE;
 
@@ -93,6 +108,9 @@ E:E'+'E {$$=$1+$3;}
 
 | NUMBER {
             $$=atof($1);} 
+| Identifier {
+            $$ = 1;
+}
 
 ; 
 

@@ -50,7 +50,9 @@ extern int yydebug;
     NEWLINE = 260,
     DATATYPE = 261,
     PRINT = 262,
-    STRING = 263
+    STRING = 263,
+    IF = 264,
+    ELSE = 265
   };
 #endif
 /* Tokens.  */
@@ -60,6 +62,8 @@ extern int yydebug;
 #define DATATYPE 261
 #define PRINT 262
 #define STRING 263
+#define IF 264
+#define ELSE 265
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -71,7 +75,7 @@ union YYSTYPE
           float num;
  
 
-#line 75 "y.tab.h" /* yacc.c:1909  */
+#line 79 "y.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

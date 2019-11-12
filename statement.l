@@ -19,6 +19,13 @@
 (print) {
 	return PRINT;
 }
+(if) {
+	return IF;
+}
+
+(else) {
+	return ELSE;
+}
 
 \"[a-zA-Z0-9 ]*\" {
 		yylval.str = (char*)yytext;
