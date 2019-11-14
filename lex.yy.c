@@ -789,7 +789,7 @@ case 6:
 YY_RULE_SETUP
 #line 30 "statement.l"
 {
-		yylval.str = (char*)yytext;
+		yylval.str = strdup((char*)yytext);
 		return STRING;
 }
 	YY_BREAK
@@ -797,7 +797,7 @@ case 7:
 YY_RULE_SETUP
 #line 34 "statement.l"
 { 
-		yylval.str = (char*)yytext;
+		yylval.str = strdup((char*)yytext);
 		return NUMBER; 
 	} 
 	YY_BREAK
@@ -805,7 +805,7 @@ case 8:
 YY_RULE_SETUP
 #line 39 "statement.l"
 { 
-		yylval.str = (char*)yytext;
+		yylval.str = strdup((char*)yytext);
 		return Identifier; 
 	} 
 	YY_BREAK

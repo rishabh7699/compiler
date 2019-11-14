@@ -1,21 +1,4 @@
-integer xyz = (1+21)*apple, abc = (9+3)*4, rishabh;
-decimal rishabh = 90;
-xyz = 0+rishabh;
-integer c = 0;
-print "hi";
-print a;
-xyz = 3+4*5;
-
-if (a) 
-{
-    print a;
-}else
-{
-    print "no";
-
-
-    a = 9+f;
-
-
-}
-
+integer a = 3;
+a = 10 + a*a;
+integer b = a;
+print "a","b";

@@ -28,16 +28,16 @@
 }
 
 \"[a-zA-Z0-9 ]*\" {
-		yylval.str = (char*)yytext;
+		yylval.str = strdup((char*)yytext);
 		return STRING;
 }
 ([0-9]+|[0-9]+\.[0-9]+) { 
-		yylval.str = (char*)yytext;
+		yylval.str = strdup((char*)yytext);
 		return NUMBER; 
 	} 
 
 [a-zA-Z_][a-zA-Z0-9_]* { 
-		yylval.str = (char*)yytext;
+		yylval.str = strdup((char*)yytext);
 		return Identifier; 
 	} 
 
