@@ -464,12 +464,12 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "statement.l"
-#line 2 "statement.l"
+#line 1 "lexer.l"
+#line 2 "lexer.l"
 /* Definition section */
 
-#include<stdio.h> 
-#include "y.tab.h" 
+	#include<stdio.h> 
+	#include "y.tab.h" 
 #line 474 "lex.yy.c"
 /* Rule Section */
 #line 476 "lex.yy.c"
@@ -689,7 +689,7 @@ YY_DECL
 		}
 
 	{
-#line 10 "statement.l"
+#line 10 "lexer.l"
 
 #line 695 "lex.yy.c"
 
@@ -750,7 +750,7 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 11 "statement.l"
+#line 11 "lexer.l"
 {
 	yylval.num = 1;
 	return DATATYPE;
@@ -758,7 +758,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 15 "statement.l"
+#line 15 "lexer.l"
 {
 	yylval.num = 2;
 	return DATATYPE;
@@ -766,73 +766,73 @@ YY_RULE_SETUP
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 19 "statement.l"
+#line 19 "lexer.l"
 {
 	return PRINT;
 }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 22 "statement.l"
+#line 22 "lexer.l"
 {
 	return IF;
 }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 26 "statement.l"
+#line 26 "lexer.l"
 {
 	return ELSE;
 }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 30 "statement.l"
+#line 30 "lexer.l"
 {
-		yylval.str = strdup((char*)yytext);
+		yylval.str = (char*)yytext;
 		return STRING;
 }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 34 "statement.l"
+#line 34 "lexer.l"
 { 
-		yylval.str = strdup((char*)yytext);
+		yylval.str = (char*)yytext;
 		return NUMBER; 
 	} 
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 39 "statement.l"
+#line 39 "lexer.l"
 { 
-		yylval.str = strdup((char*)yytext);
+		yylval.str = (char*)yytext;
 		return Identifier; 
 	} 
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 44 "statement.l"
+#line 44 "lexer.l"
 ; 
 	YY_BREAK
 case 10:
 /* rule 10 can match eol */
 YY_RULE_SETUP
-#line 46 "statement.l"
+#line 46 "lexer.l"
 return NEWLINE;
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 48 "statement.l"
+#line 48 "lexer.l"
 ;
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 50 "statement.l"
+#line 50 "lexer.l"
 return yytext[0]; 
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 52 "statement.l"
+#line 52 "lexer.l"
 ECHO;
 	YY_BREAK
 #line 839 "lex.yy.c"
@@ -1840,11 +1840,11 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 52 "statement.l"
+#line 52 "lexer.l"
 
 
 int yywrap() 
 { 
-return 1; 
+	return 1; 
 } 
 

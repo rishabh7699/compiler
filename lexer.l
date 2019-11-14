@@ -1,50 +1,57 @@
+%{ 
+/* Definition section */
 
-%{
-	#include<time.h>
-%}
+	#include<stdio.h> 
+	#include "y.tab.h" 
+%} 
 
-%%
-(inta|int|float|char|void|double|return|using|namespace) {
-	printf("%s", yytext);
-	printf(" \t\t: keyword\n");
+
+/* Rule Section */
+%% 
+(integer) {
+	yylval.num = 1;
+	return DATATYPE;
 }
-\"[a-z A-Z0-9]*\" {
-	printf("%s", yytext);
-	printf(" \t\t: string\n"); 
+(decimal) {
+	yylval.num = 2;
+	return DATATYPE;
 }
-("<<"|">>"|"+"|"-"|"="|"*"|"->"|"."|"^"|"&"|"|"|"||"|"&&"|",") {
-	printf("%s", yytext);
-	printf(" \t\t: operator\n");
+(print) {
+	return PRINT;
 }
-([0-9]+|[0-9]+.[0-9]+) {
-	printf("%s", yytext);
-	printf(" \t\t: constant literal\n");
+(if) {
+	return IF;
 }
-[\n \t] {
+
+(else) {
+	return ELSE;
 }
-[a-zA-Z_][a-zA-Z0-9_]* {
-	printf("%s", yytext);
-	printf(" \t\t: identifier\n");	
+
+\"[a-zA-Z0-9 ]*\" {
+		yylval.str = (char*)yytext;
+		return STRING;
+}
+([0-9]+|[0-9]+\.[0-9]+) { 
+		yylval.str = (char*)yytext;
+		return NUMBER; 
+	} 
+
+[a-zA-Z_][a-zA-Z0-9_]* { 
+		yylval.str = (char*)yytext;
+		return Identifier; 
+	} 
+
+[\t] ; 
+
+[\n] return NEWLINE;
+
+[ ] ;
+
+. return yytext[0]; 
+
+%% 
+
+int yywrap() 
+{ 
+	return 1; 
 } 
-("\""|"'"|"{"|"}"|"["|"]"|"("|")"|"<"|">"|";") {
-	printf("%s", yytext);
-	printf(" \t\t: separator\n");	
-}
-. {
-	printf("%s", yytext);
-	printf(" \t\t: unknown\n");
-}
-%%
-
-int yywrap(){} 
-int main(){
-FILE *fp; 
-fp = fopen("program.cpp","r"); 
-yyin = fp; 
-clock_t start, end;
-start = clock();
-yylex();
-end = clock();
-printf("time taken = %f seconds\n", ((double)(end-start))/CLOCKS_PER_SEC);
-return 0;
-}
