@@ -1,4 +1,4 @@
 integer a = 3;
 a = 10 + a*a;
-integer b = a;
-print "a","b";
+integer a = a;
+print "a","b",bapple;

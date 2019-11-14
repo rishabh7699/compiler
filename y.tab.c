@@ -1353,7 +1353,7 @@ yyreduce:
 #line 95 "parser.y" /* yacc.c:1646  */
     {
     if(!is_exist((yyvsp[-1].str)))
-        printf("\nvariable %s is used in line %d but not declared\n", (yyvsp[-1].str), line);
+        printf("\nE : variable %s is used in line %d but not declared\n", (yyvsp[-1].str), line);
 }
 #line 1359 "y.tab.c" /* yacc.c:1646  */
     break;
@@ -1370,7 +1370,7 @@ yyreduce:
 #line 105 "parser.y" /* yacc.c:1646  */
     {
     if(!is_exist((yyvsp[-1].str)))
-        printf("\nvariable %s is used in line %d but not declared\n", (yyvsp[-1].str), line);
+        printf("\nE : variable %s is used in line %d but not declared\n", (yyvsp[-1].str), line);
 }
 #line 1376 "y.tab.c" /* yacc.c:1646  */
     break;
@@ -1379,7 +1379,7 @@ yyreduce:
 #line 113 "parser.y" /* yacc.c:1646  */
     { 
     if(!is_exist((yyvsp[-3].str)))
-        printf("\nvariable %s is used in line %d but not declared\n", (yyvsp[-3].str), line);
+        printf("\nE : variable %s is used in line %d but not declared\n", (yyvsp[-3].str), line);
     printf("\nResult=%f\n", (yyvsp[-1].num)); 
 
     }
@@ -1427,7 +1427,7 @@ yyreduce:
 #line 131 "parser.y" /* yacc.c:1646  */
     {
             if(!is_exist((yyvsp[0].str)))
-                printf("\nvariable %s is used in line %d but not declared\n", (yyvsp[0].str), line);
+                printf("\nE : variable %s is used in line %d but not declared\n", (yyvsp[0].str), line);
             (yyval.num) = 1;
 }
 #line 1434 "y.tab.c" /* yacc.c:1646  */
@@ -1668,12 +1668,13 @@ yyreturn:
 //driver code 
 void main() 
 { 
-yyin=fopen("exp","r");
-yyparse(); 
+    initialize_map();
+    yyin=fopen("exp","r");
+    yyparse(); 
 } 
 
 void yyerror() 
 { 
-printf("\nError in line %d\n\n", line); 
-flag=1; 
+    printf("\nE : Error in line %d\n\n", line); 
+    flag=1; 
 } 

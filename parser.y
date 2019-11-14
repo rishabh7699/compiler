@@ -94,7 +94,7 @@ Output : PRINT STRING  MoreOutput{
 }
 | PRINT Identifier MoreOutput {
     if(!is_exist($2))
-        printf("\nvariable %s is used in line %d but not declared\n", $2, line);
+        printf("\nE : variable %s is used in line %d but not declared\n", $2, line);
 } 
 ;
 
@@ -104,7 +104,7 @@ MoreOutput :
 } 
 | ',' Identifier MoreOutput {
     if(!is_exist($2))
-        printf("\nvariable %s is used in line %d but not declared\n", $2, line);
+        printf("\nE : variable %s is used in line %d but not declared\n", $2, line);
 }
 ;
 
@@ -112,7 +112,7 @@ newline : NEWLINE;
 
 Expression: Identifier '=' E ';'{ 
     if(!is_exist($1))
-        printf("\nvariable %s is used in line %d but not declared\n", $1, line);
+        printf("\nE : variable %s is used in line %d but not declared\n", $1, line);
     printf("\nResult=%f\n", $3); 
 
     }; 
@@ -130,7 +130,7 @@ E:E'+'E {$$=$1+$3;}
             $$=atof($1);} 
 | Identifier {
             if(!is_exist($1))
-                printf("\nvariable %s is used in line %d but not declared\n", $1, line);
+                printf("\nE : variable %s is used in line %d but not declared\n", $1, line);
             $$ = 1;
 }
 
@@ -141,12 +141,13 @@ E:E'+'E {$$=$1+$3;}
 //driver code 
 void main() 
 { 
-yyin=fopen("exp","r");
-yyparse(); 
+    initialize_map();
+    yyin=fopen("exp","r");
+    yyparse(); 
 } 
 
 void yyerror() 
 { 
-printf("\nError in line %d\n\n", line); 
-flag=1; 
+    printf("\nE : Error in line %d\n\n", line); 
+    flag=1; 
 } 
