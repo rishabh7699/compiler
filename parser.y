@@ -22,7 +22,6 @@
 
 %left '(' ')'
 
-%type<num> E Expression DATATYPE
 %type<str> NUMBER Identifier STRING
 
 /* Rule Section */
@@ -39,7 +38,7 @@
                 Declaration | 
                 Input | 
                 Output ';' | 
-                newline 
+                NEWLINE 
                 {
                     line++;
                 } | 
@@ -48,11 +47,11 @@
 
     IFstatement : IF '(' Identifier ')' ENTER '{' IFblock '}' ENTER ELSE ENTER '{' IFblock '}' 
                 {
-                    printf("\n if statement \n");
+                    printf("\n if else statement \n");
                 };
 
     ENTER : | 
-            newline ENTER 
+            NEWLINE ENTER 
             {
                 line++;
             };
@@ -67,7 +66,6 @@
                 DATATYPE Identifier '=' E MoreD ';' 
                 { 
                     add_identifier($2, line);
-                    printf("\nResult=%f\n", $4); 
                 };
 
     MoreD: | 
@@ -78,69 +76,65 @@
             ',' Identifier '=' E MoreD 
             { 
                 add_identifier($2, line);
-                printf("\nResult=%f\n", $4); 
             };
 
     Input : 'i''n''p''u''t';
 
     Output : PRINT STRING MoreOutput
             {
-                printf("\n%s\n",$2);
+                printf("\nstring %s will be printed\n",$2);
             } | 
             PRINT Identifier MoreOutput 
             {
                 if(!is_exist($2))
                     printf("\nE : variable %s is used in line %d but not declared\n", $2, line);
+                else
+                    printf("\nvariable %s will be printed\n", $2);
             };
 
     MoreOutput : | 
                 ',' STRING MoreOutput 
                 {
-                    printf("\n%s\n",$2);
+                    printf("\nstring %s will be printed\n",$2);
                 } | 
                 ',' Identifier MoreOutput 
                 {
                     if(!is_exist($2))
                         printf("\nE : variable %s is used in line %d but not declared\n", $2, line);
+                    else
+                        printf("\nvariable %s will be printed\n", $2);
                 };
 
-    newline : NEWLINE;
 
     Expression: Identifier '=' E ';'
                 { 
                     if(!is_exist($1))
                         printf("\nE : variable %s is used in line %d but not declared\n", $1, line);
-                    printf("\nResult=%f\n", $3); 
+                    else
+                        printf("\nvalue of variable %s is updated\n", $1);
                 }; 
     E: E'+'E 
         {
-            $$=$1+$3;
         } |
         E'-'E 
         {
-            $$=$1-$3;
         } |
         E'*'E 
         {
-            $$=$1*$3;
         } |
         E'/'E 
         {
-            $$=$1/$3;
         } |
         '('E')' 
         {
-            $$=$2;
         } | 
         NUMBER 
         {
-            $$=atof($1);
         } | 
         Identifier 
         {
             if(!is_exist($1))
                 printf("\nE : variable %s is used in line %d but not declared\n", $1, line);
-            $$ = 1;
         }; 
 
 %% 

@@ -39,6 +39,7 @@ void add_identifier(char *x, int line)
         printf("\nE : Multiple declaration of variable %s in line %d\n", x, line);
     else
     {
+        printf("\nvariable %s declared\n", x);
         int hash_value = hash(x);
         
         if(map[hash_value] == NULL)

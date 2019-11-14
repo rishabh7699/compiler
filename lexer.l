@@ -9,11 +9,9 @@
 /* Rule Section */
 %% 
 (integer) {
-	yylval.num = 1;
 	return DATATYPE;
 }
 (decimal) {
-	yylval.num = 2;
 	return DATATYPE;
 }
 (print) {
@@ -28,16 +26,16 @@
 }
 
 \"[a-zA-Z0-9 ]*\" {
-		yylval.str = (char*)yytext;
+		yylval.str = strdup(yytext);
 		return STRING;
 }
 ([0-9]+|[0-9]+\.[0-9]+) { 
-		yylval.str = (char*)yytext;
+		yylval.str = strdup(yytext);
 		return NUMBER; 
 	} 
 
 [a-zA-Z_][a-zA-Z0-9_]* { 
-		yylval.str = (char*)yytext;
+		yylval.str = strdup(yytext);
 		return Identifier; 
 	} 
 
